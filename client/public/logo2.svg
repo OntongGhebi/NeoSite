@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   viewBox="0 0 272.34 249.5"
+   version="1.1"
+   id="svg4"
+   sodipodi:docname="6bcb4c19-a57e-4bed-bd77-821fe9a5e7c0.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview4"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1" />
+  <defs
+     id="defs1">
+    <style
+       id="style1">.cls-1{fill:#f2f2f2;}</style>
+  </defs>
+  <g
+     id="Layer_2"
+     data-name="Layer 2">
+    <g
+       id="Layer_1-2"
+       data-name="Layer 1">
+      <polygon
+         class="cls-1"
+         points="159.73 134.67 159.49 134.91 159.49 134.67 159.73 134.67"
+         id="polygon1" />
+      <polygon
+         class="cls-1"
+         points="159.73 134.67 159.49 134.91 159.49 134.67 159.73 134.67"
+         id="polygon2" />
+      <polygon
+         class="cls-1"
+         points="272.34 112.44 160.87 227.26 159.49 134.91 159.73 134.67 159.49 134.67 159.19 114.14 112.85 114.83 224.31 0 225.98 113.13 272.34 112.44"
+         id="polygon3" />
+      <polygon
+         class="cls-1"
+         points="159.49 134.67 159.49 134.91 48.25 249.5 46.58 136.37 0 137.05 111.47 22.23 112.84 114.8 113.14 135.36 159.49 134.67"
+         id="polygon4" />
+    </g>
+  </g>
+</svg>
