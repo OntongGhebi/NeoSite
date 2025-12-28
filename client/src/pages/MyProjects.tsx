@@ -79,7 +79,7 @@ const MyProjects = () => {
                       <h2 className="text-lg font-medium line-clamp-2">
                         {project.name}
                       </h2>
-                      <button className="px-2.5 py-0.5 ml-2 text-xs bg-gray-800 border border-gray-700 rounded-full">
+                      <button className="px-2.5 py-1 ml-2 text-xs bg-gray-800 border border-gray-700 rounded-full">
                         Website
                       </button>
                     </div>

@@ -4,6 +4,15 @@ export const asset = {
   logo,
 };
 
+const dummyUser = {
+  id: "user-001",
+  email: "ghebi@example.com",
+  fullName: "Ghebi Armando",
+  imageUrl: "https://avatars.githubusercontent.com/u/1",
+  name: "OntongGhebi",
+  image: "https://avatars.githubusercontent.com/u/1",
+};
+
 export const dummyProjects = [
   {
     id: "a1b2c3d4-e001-4f9a-9c12-websitebuilder01",
@@ -41,6 +50,7 @@ export const dummyProjects = [
     `,
     createdAt: "2025-12-27T09:00:00.000Z",
     updatedAt: "2025-12-27T09:00:00.000Z",
+    user: dummyUser,
     userId: "user-001",
     isPublished: false,
     versionId: "v1",
@@ -114,6 +124,7 @@ export const dummyProjects = [
 `,
     createdAt: "2025-12-26T10:00:00.000Z",
     updatedAt: "2025-12-26T10:10:00.000Z",
+    user: dummyUser,
     userId: "user-001",
     isPublished: true,
     versionId: "v1",
@@ -178,6 +189,7 @@ export const dummyProjects = [
 `,
     createdAt: "2025-12-25T08:00:00.000Z",
     updatedAt: "2025-12-25T08:20:00.000Z",
+    user: dummyUser,
     userId: "user-002",
     isPublished: false,
     versionId: "v2",
@@ -232,6 +244,7 @@ export const dummyProjects = [
 `,
     createdAt: "2025-12-24T14:00:00.000Z",
     updatedAt: "2025-12-24T14:10:00.000Z",
+    user: dummyUser,
     userId: "user-003",
     isPublished: true,
     versionId: "v1",
@@ -280,6 +293,7 @@ export const dummyProjects = [
 `,
     createdAt: "2025-12-23T11:00:00.000Z",
     updatedAt: "2025-12-23T11:15:00.000Z",
+    user: dummyUser,
     userId: "user-004",
     isPublished: false,
     versionId: "v1",
