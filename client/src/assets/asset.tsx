@@ -4,6 +4,51 @@ export const asset = {
   logo,
 };
 
+export const appPlans = [
+  {
+    id: "basic",
+    name: "Basic",
+    price: "$5",
+    credits: 100,
+    description: "Start Now, scale up as you grow.",
+    features: [
+      "Up to 20 Creations",
+      "Limited Revisions",
+      "Basic AI Models",
+      "Email Support",
+      "Basic Analytics",
+    ],
+  },
+  {
+    id: "pro",
+    name: "Pro",
+    price: "$19",
+    credits: 400,
+    description: "Add credits to create more projects.",
+    features: [
+      "Up to 80 Creations",
+      "Extended Revisions",
+      "Advanced AI Models",
+      "Priority Email Support",
+      "Advanced Analytics",
+    ],
+  },
+  {
+    id: "enterprise",
+    name: "Enterprise",
+    price: "$49",
+    credits: 100,
+    description: "Add credits to create more projects.",
+    features: [
+      "Up to 200 Creations",
+      "Increased Revisions",
+      "Advanced AI Models",
+      "Email + Chat Support",
+      "Advanced Analytics",
+    ],
+  },
+];
+
 const dummyUser = {
   id: "user-001",
   email: "ghebi@example.com",
