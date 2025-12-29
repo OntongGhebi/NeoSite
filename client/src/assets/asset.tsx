@@ -354,3 +354,45 @@ export const dummyProjects = [
     current_version_index: "0",
   },
 ];
+
+export const dummyConversations = [
+  {
+    id: "msg-001",
+    role: "user",
+    content: "Create a modern developer portfolio website.",
+    timestamp: "2025-12-27T09:00:00.000Z",
+  },
+  {
+    id: "msg-002",
+    role: "assistant",
+    content:
+      "Sure! I will create a modern portfolio website with hero, about, skills, and contact sections using Tailwind CSS.",
+    timestamp: "2025-12-27T09:00:05.000Z",
+  },
+  {
+    id: "msg-003",
+    role: "user",
+    content: "Add smooth animations and make the design dark-themed.",
+    timestamp: "2025-12-27T09:01:00.000Z",
+  },
+  {
+    id: "msg-004",
+    role: "assistant",
+    content:
+      "Done. I've applied a dark theme, hover transitions, and smooth layout spacing.",
+    timestamp: "2025-12-27T09:01:06.000Z",
+  },
+  {
+    id: "msg-005",
+    role: "user",
+    content: "Can you also add a responsive skills grid section?",
+    timestamp: "2025-12-27T09:02:00.000Z",
+  },
+  {
+    id: "msg-006",
+    role: "assistant",
+    content:
+      "Yes, I've added a responsive grid layout for the skills section that adapts to mobile and desktop screens.",
+    timestamp: "2025-12-27T09:02:08.000Z",
+  },
+];
