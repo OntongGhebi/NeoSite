@@ -15,6 +15,7 @@ import {
   XIcon,
 } from "lucide-react";
 import { dummyConversations, dummyProjects } from "../assets/asset";
+import Sidebar from "../components/Sidebar";
 
 const Projects = () => {
   const { projectId } = useParams();
@@ -158,7 +159,13 @@ const Projects = () => {
         </div>
       </div>
       <div className="flex-1 flex overflow-auto">
-        <div>Sidebar</div>
+        <Sidebar
+          isMenuOpen={isMenuOpen}
+          project={project}
+          setProject={(p) => setProject(p)}
+          isGenerating={isGenerating}
+          setIsGenerating={setIsGenerating}
+        />
         <div className="flex-1 p-2 pl-0">Project Preview</div>
       </div>
     </div>
