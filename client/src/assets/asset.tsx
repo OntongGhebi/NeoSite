@@ -396,3 +396,5 @@ export const dummyConversations = [
     timestamp: "2025-12-27T09:02:08.000Z",
   },
 ];
+
+export const dummyVersions = [];

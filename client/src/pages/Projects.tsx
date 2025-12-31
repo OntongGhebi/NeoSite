@@ -14,7 +14,11 @@ import {
   TabletIcon,
   XIcon,
 } from "lucide-react";
-import { dummyConversations, dummyProjects } from "../assets/asset";
+import {
+  dummyConversations,
+  dummyProjects,
+  dummyVersions,
+} from "../assets/asset";
 import Sidebar from "../components/Sidebar";
 
 const Projects = () => {
@@ -36,7 +40,11 @@ const Projects = () => {
     const project = dummyProjects.find((project) => project.id === projectId);
     setTimeout(() => {
       if (project) {
-        setProject({ ...project, conversation: dummyConversations });
+        setProject({
+          ...project,
+          conversation: dummyConversations,
+          versions: dummyVersions,
+        });
         setLoading(false);
         setIsGenerating(project.current_code ? false : true);
       }
