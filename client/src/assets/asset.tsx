@@ -398,3 +398,4 @@ export const dummyConversations = [
 ];
 
 export const dummyVersions = [];
+export const iframeScript = [];
