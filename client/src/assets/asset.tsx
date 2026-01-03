@@ -398,4 +398,84 @@ export const dummyConversations = [
 ];
 
 export const dummyVersions = [];
-export const iframeScript = [];
+export const iframeScript = `
+<script>
+(function () {
+  let selectedElement = null;
+
+  /* -----------------------------
+   * CLICK TO SELECT ELEMENT
+   * ----------------------------- */
+  document.addEventListener("click", function (e) {
+    e.preventDefault();
+    e.stopPropagation();
+
+    const el = e.target;
+    if (!(el instanceof HTMLElement)) return;
+    if (el === document.body || el === document.documentElement) return;
+
+    if (selectedElement) {
+      selectedElement.style.outline = "";
+    }
+
+    selectedElement = el;
+    selectedElement.style.outline = "2px solid #6366f1";
+
+    const computed = window.getComputedStyle(el);
+
+    window.parent.postMessage(
+      {
+        type: "ELEMENT_SELECTED",
+        payload: {
+          tagName: el.tagName,
+          className: el.className || "",
+          text: el.innerText || "",
+          styles: {
+            padding: computed.padding,
+            margin: computed.margin,
+            backgroundColor: computed.backgroundColor,
+            color: computed.color,
+            fontSize: computed.fontSize,
+          },
+        },
+      },
+      "*"
+    );
+  });
+
+  /* -----------------------------
+   * APPLY UPDATE FROM EDITOR
+   * ----------------------------- */
+  window.addEventListener("message", function (event) {
+    if (!event.data) return;
+
+    if (event.data.type === "UPDATE_ELEMENT" && selectedElement) {
+      const { text, className, styles } = event.data.payload || {};
+
+      if (text !== undefined) {
+        selectedElement.innerText = text;
+      }
+
+      if (className !== undefined) {
+        selectedElement.className = className;
+      }
+
+      if (styles) {
+        Object.entries(styles).forEach(([key, value]) => {
+          selectedElement.style[key] = value;
+        });
+      }
+    }
+
+    if (event.data.type === "CLEAR_SELECTION_REQUEST") {
+      if (selectedElement) {
+        selectedElement.style.outline = "";
+      }
+      selectedElement = null;
+    }
+  });
+
+  console.log("IFRAME EDITOR SCRIPT LOADED");
+})();
+</script>
+`;

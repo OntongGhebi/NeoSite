@@ -31,15 +31,16 @@ const ProjectPreview = forwardRef<ProjectPreviewRef, ProjectPreviewProps>(
 
     useEffect(() => {
       const handleMessage = (event: MessageEvent) => {
-        if (event.data.type === "ELEMENT_SELECTED") {
+        if (event.data?.type === "ELEMENT_SELECTED") {
           setSelectedElement(event.data.payload);
-        } else if (event.data.type === "CLEAR_SELECTION") {
+        } else if (event.data?.type === "CLEAR_SELECTION") {
           setSelectedElement(null);
         }
       };
+
       window.addEventListener("message", handleMessage);
       return () => window.removeEventListener("message", handleMessage);
-    });
+    }, []);
 
     const handleUpdate = (updates: any) => {
       if (iframeRef.current?.contentWindow) {
@@ -82,7 +83,7 @@ const ProjectPreview = forwardRef<ProjectPreviewRef, ProjectPreviewProps>(
                   if (iframeRef.current?.contentWindow) {
                     iframeRef.current.contentWindow.postMessage(
                       {
-                        type: "CLEAR_SELCTION_REQUEST",
+                        type: "CLEAR_SELECTION_REQUEST",
                       },
                       "*"
                     );
