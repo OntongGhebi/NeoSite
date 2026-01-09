@@ -7,6 +7,8 @@ import Preview from "./pages/Preview";
 import Projects from "./pages/Projects";
 import Pricing from "./pages/Pricing";
 import Navbar from "./components/Navbar";
+import { Toaster } from "sonner";
+import AuthPage from "./pages/auth/AuthPage";
 
 const App = () => {
   const { pathname } = useLocation();
@@ -18,6 +20,7 @@ const App = () => {
 
   return (
     <div>
+      <Toaster />
       {!hideNavbar && <Navbar />}
       <Routes>
         <Route path="/" element={<Home />} />
@@ -28,6 +31,7 @@ const App = () => {
         <Route path="/preview/:projectId/:versionId" element={<Preview />} />
         <Route path="/community" element={<Community />} />
         <Route path="/pricing" element={<Pricing />} />
+        <Route path="/auth/:pathname" element={<AuthPage />} />
       </Routes>
     </div>
   );
