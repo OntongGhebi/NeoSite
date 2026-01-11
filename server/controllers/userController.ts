@@ -93,7 +93,7 @@ export const createUserProject = async (req: Request, res: Response) => {
         {
           role: "system",
           content: `
-          You are a prompt enhancement specialist. Take yhe user's website request and expand it into a detailed, comprehensive prompt that will create the best possible website.
+          You are a prompt enhancement specialist. Take the user's website request and expand it into a detailed, comprehensive prompt that will create the best possible website.
 
           Enhance this prompt by:
           1. Adding specific design details (layout, color scheme, typography).
