@@ -14,26 +14,25 @@ import {
   TabletIcon,
   XIcon,
 } from "lucide-react";
-import {
-  dummyConversations,
-  dummyProjects,
-  dummyVersions,
-} from "../assets/asset";
 import Sidebar from "../components/Sidebar";
 import ProjectPreview, {
   type ProjectPreviewRef,
 } from "../components/ProjectPreview";
+import api from "@/configs/axios";
+import { toast } from "sonner";
+import { authClient } from "@/lib/auth-client";
 
 const Projects = () => {
   const { projectId } = useParams();
   const navigate = useNavigate();
+  const { data: session, isPending } = authClient.useSession();
 
   const [project, setProject] = useState<Project | null>(null);
   const [loading, setLoading] = useState(true);
 
   const [isGenerating, setIsGenerating] = useState(true);
   const [device, setDevice] = useState<"phone" | "tablet" | "desktop">(
-    "desktop"
+    "desktop",
   );
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -42,18 +41,22 @@ const Projects = () => {
   const previewRef = useRef<ProjectPreviewRef>(null);
 
   const fetchProject = async () => {
-    const project = dummyProjects.find((project) => project.id === projectId);
-    setTimeout(() => {
-      if (project) {
-        setProject({
-          ...project,
-          conversation: dummyConversations,
-          versions: dummyVersions,
-        });
-        setLoading(false);
-        setIsGenerating(project.current_code ? false : true);
+    try {
+      const { data } = await api.get(`/api/user/project/${projectId}`);
+      if (data.project) {
+        setProject(data.project);
+        setIsGenerating(data.project.current_code ? false : true);
+      } else {
+        setProject(null);
+        setIsGenerating(true);
       }
-    }, 2000);
+      setLoading(false);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
+      toast.error(error?.response?.data?.message || error.message);
+      console.log(error);
+      setLoading(false); // Ensure loading state is updated even on error
+    }
   };
 
   const saveProject = async () => {};
@@ -77,8 +80,21 @@ const Projects = () => {
   const togglePublish = async () => {};
 
   useEffect(() => {
-    fetchProject();
-  }, []);
+    if (session?.user) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      fetchProject();
+    } else if (!isPending && !session?.user) {
+      navigate("/");
+      toast("Please login to view your projects");
+    }
+  });
+
+  useEffect(() => {
+    if (project && !project.current_code) {
+      const intervalId = setInterval(fetchProject, 1000);
+      return () => clearInterval(intervalId);
+    }
+  }, [project]);
 
   if (loading) {
     return (
