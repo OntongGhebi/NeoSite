@@ -12,12 +12,12 @@ import {
 
 const projectRouter = express.Router();
 
-projectRouter.post("/revision/:id", protect, makeRevision);
+projectRouter.post("/revision/:projectId", protect, makeRevision);
 projectRouter.put("/projects/:id", protect, saveProject);
 projectRouter.get(
   "/rollback/:projectId/:versionId",
   protect,
-  rollbackToVersion
+  rollbackToVersion,
 );
 projectRouter.delete("/:projectId", protect, deleteProject);
 projectRouter.get("/preview/:projectId", protect, getProjectPreview);
