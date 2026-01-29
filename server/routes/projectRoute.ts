@@ -13,7 +13,7 @@ import {
 const projectRouter = express.Router();
 
 projectRouter.post("/revision/:projectId", protect, makeRevision);
-projectRouter.put("/projects/:id", protect, saveProject);
+projectRouter.put("/save/:projectId", protect, saveProject);
 projectRouter.get(
   "/rollback/:projectId/:versionId",
   protect,
@@ -21,7 +21,7 @@ projectRouter.get(
 );
 projectRouter.delete("/:projectId", protect, deleteProject);
 projectRouter.get("/preview/:projectId", protect, getProjectPreview);
-projectRouter.get("/published", getPublishedProjects);
-projectRouter.get("/published/:projectId", getProjectById);
+projectRouter.get("/isPublished", getPublishedProjects);
+projectRouter.get("/isPublished/:projectId", getProjectById);
 
 export default projectRouter;

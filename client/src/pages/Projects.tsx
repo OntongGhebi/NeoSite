@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Link, useNavigate, useParams } from "react-router-dom";
 import type { Project } from "../types";
 import { useEffect, useRef, useState } from "react";
@@ -51,7 +52,6 @@ const Projects = () => {
         setIsGenerating(true);
       }
       setLoading(false);
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       toast.error(error?.response?.data?.message || error.message);
       console.log(error);
@@ -59,7 +59,23 @@ const Projects = () => {
     }
   };
 
-  const saveProject = async () => {};
+  const saveProject = async () => {
+    if (!previewRef.current) return;
+    const code = previewRef.current.getCode();
+    if (!code) return;
+    setIsSaving(true);
+    try {
+      const { data } = await api.put(`/api/project/save/${projectId}`, {
+        code,
+      });
+      toast.success(data.message);
+    } catch (error: any) {
+      toast.error(error?.response?.data?.message || error.message);
+      console.log(error);
+    } finally {
+      setIsSaving(false);
+    }
+  };
 
   // download to index.html
   const downloadcode = () => {
@@ -77,7 +93,23 @@ const Projects = () => {
     document.body.appendChild(element);
     element.click();
   };
-  const togglePublish = async () => {};
+  const togglePublish = async () => {
+    try {
+      const { data } = await api.get(`/api/user/publish-toggle/${projectId}`);
+      toast.success(data.message);
+      setProject((prev) =>
+        prev
+          ? {
+              ...prev,
+              isPublished: !prev.isPublished,
+            }
+          : null,
+      );
+    } catch (error: any) {
+      toast.error(error?.response?.data?.message || error.message);
+      console.log(error);
+    }
+  };
 
   useEffect(() => {
     if (session?.user) {
