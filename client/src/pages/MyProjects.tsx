@@ -1,32 +1,55 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect, useState } from "react";
 import type { Project } from "../types";
 import { Loader2Icon, PlusIcon, TrashIcon } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import { dummyProjects } from "../assets/asset";
 import Footer from "../components/Footer";
+import api from "@/configs/axios";
+import { toast } from "sonner";
+import { authClient } from "@/lib/auth-client";
 
 const MyProjects = () => {
+  const { data: session, isPending } = authClient.useSession();
   const [loading, setLoading] = useState(true);
   const [projects, setProjects] = useState<Project[]>([]);
   const navigate = useNavigate();
 
   // Fetch projects logic
-  const fetchProjects = () => {
-    setProjects(dummyProjects);
-    setLoading(false);
+  const fetchProjects = async () => {
+    try {
+      const { data } = await api.get("/api/user/projects");
+      setProjects(data.projects);
+      setLoading(false);
+    } catch (error: any) {
+      toast.error(error?.response?.data?.message || error.message);
+      console.log(error);
+    }
+  };
+
+  const deleteProject = async (projectId: string) => {
+    try {
+      const confirm = window.confirm(
+        "Are you sure want to delete this project?",
+      );
+      if (!confirm) return;
+      const { data } = await api.delete(`/api/project/${projectId}`);
+      setProjects(data.projects);
+      fetchProjects();
+    } catch (error: any) {
+      toast.error(error?.response?.data?.message || error.message);
+      console.log(error);
+    }
   };
 
   useEffect(() => {
-    // Simulate fetching projects with a timeout
-    const timer = setTimeout(() => {
+    if (session?.user && !isPending) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       fetchProjects();
-    }, 1000);
-
-    // Cleanup timeout on unmount
-    return () => clearTimeout(timer);
-  }, []);
-
-  const deleteProject = async (projectId: string) => {};
+    } else if (!isPending && !session?.user) {
+      navigate("/");
+      toast("Please login to view your projects");
+    }
+  }, [session?.user, isPending, navigate]);
 
   return (
     <>
@@ -35,7 +58,7 @@ const MyProjects = () => {
           <div className="flex items-center justify-center h-[80vh]">
             <Loader2Icon className="size-7 animate-spin text-indigo-200" />
           </div>
-        ) : projects.length > 0 ? (
+        ) : Array.isArray(projects) && projects.length > 0 ? (
           <div className="py-10 min-h-[80vh]">
             <div className="flex items-center justify-between mb-12">
               <h1 className="text-2xl font-medium text-white">My Projects</h1>
